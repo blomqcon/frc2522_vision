@@ -1,3 +1,8 @@
+examples/
+native_test/test_clip/*
+*/node_modules/*
+node_server/build/*
+
 # Compiled Object files
 *.slo
 *.lo

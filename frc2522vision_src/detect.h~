@@ -1,0 +1,16 @@
+
+#include <vector>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+using namespace cv;
+
+namespace frc2522cv {
+    namespace detect {
+        Mat redBinderBlob(Mat frame, Mat bw);
+        Mat redBinderBoundingBlob(Mat frame);
+        Mat redBinderContour(Mat frame);
+        Mat redBinderHough(Mat frame);
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "FRC 2522 Vision Server",
+  "version": "0.0.0",
+  "description": "Server for 2522 vision tracking",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "test": "node server.js"
+  },
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "~1.2.1"
+  }
+}
