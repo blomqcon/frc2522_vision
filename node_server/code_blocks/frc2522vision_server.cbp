@@ -31,6 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../../frc2522vision_src/camera.cpp" />
+		<Unit filename="../../frc2522vision_src/camera.h" />
+		<Unit filename="../../frc2522vision_src/detect.cpp" />
+		<Unit filename="../../frc2522vision_src/detect.h" />
+		<Unit filename="../../frc2522vision_src/filter.cpp" />
+		<Unit filename="../../frc2522vision_src/filter.h" />
+		<Unit filename="../custom_module/addon.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

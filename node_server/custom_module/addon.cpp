@@ -18,8 +18,9 @@ Handle<Value> Add(const Arguments& args) {
 
   double arg0 = args[0]->NumberValue();
   double arg1 = args[1]->NumberValue();
-  
+
   Local<Number> num = Number::New(frc2522cv::detect::getTargetLocation(arg0, arg1));
+
 
   return scope.Close(num);
 }

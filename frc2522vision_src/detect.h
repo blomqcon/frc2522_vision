@@ -11,7 +11,8 @@
 namespace frc2522cv {
     using namespace cv;
     namespace detect {
-        Mat redBinderBlob(Mat frame, Mat bw);
+        Mat showRedBinderBlob(Mat frame, Mat bw);
+        Point2d redBinderBlob(Mat frame);
         Mat redBinderBoundingBlob(Mat frame);
         Mat redBinderContour(Mat frame);
         Mat redBinderHough(Mat frame);

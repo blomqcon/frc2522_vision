@@ -12,7 +12,7 @@ double angle( cv::Point pt1, cv::Point pt2, cv::Point pt0 ) {
     return (dx1*dx2 + dy1*dy2)/sqrt((dx1*dx1 + dy1*dy1)*(dx2*dx2 + dy2*dy2) + 1e-10);
 }
 
-Mat detect::redBinderBlob(Mat frame, Mat bw) {
+Mat detect::showRedBinderBlob(Mat frame, Mat bw) {
     SimpleBlobDetector::Params params;
     //params.minDistBetweenBlobs = 10.0f;
     //params.minThreshold = 100;
@@ -22,6 +22,8 @@ Mat detect::redBinderBlob(Mat frame, Mat bw) {
     params.minDistBetweenBlobs = 100.0f;  // minimum 10 pixels between blobs
     params.filterByColor = false;
     params.filterByCircularity = false;
+    params.filterByConvexity = false;
+    params.filterByInertia = false;
     params.filterByArea = true;
     params.minArea = 10.0f;
     params.maxArea = 99999999.9f;
@@ -31,12 +33,38 @@ Mat detect::redBinderBlob(Mat frame, Mat bw) {
 
     std::vector<cv::KeyPoint> keypoints;
     blob_detector.detect(bw, keypoints);
-    std::cout << keypoints.size() << std::endl;
 
     Mat frame_blobs;
     drawKeypoints(bw, keypoints, frame_blobs, Scalar(0,0,255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
     return frame_blobs;
     return frame;
+}
+
+Point2d detect::redBinderBlob(Mat frame_bw) {
+    SimpleBlobDetector::Params params;
+    params.minDistBetweenBlobs = 100.0f;  // minimum 10 pixels between blobs
+    params.filterByColor = false;
+    params.filterByCircularity = false;
+    params.filterByArea = true;
+    params.minArea = 10.0f;
+    params.maxArea = 99999999.9f;
+    params.minRepeatability = 1;
+
+    std::vector<cv::KeyPoint> keypoints;
+    SimpleBlobDetector blob_detector(params);
+    blob_detector.detect(frame_bw, keypoints);
+    cout << keypoints.size() << endl;
+    if(keypoints.size() > 0) {
+        KeyPoint largestKeyPoint = keypoints[0];
+        for(int i = 1; i < keypoints.size(); i++) {
+            if(keypoints[i].size > largestKeyPoint.size) {
+                largestKeyPoint = keypoints[i];
+            }
+        }
+        return largestKeyPoint.pt;
+    } else {
+        return Point2d(-1, -1);
+    }
 }
 
 Mat detect::redBinderBoundingBlob(Mat frame) {

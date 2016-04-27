@@ -8,7 +8,7 @@ using namespace std;
 using namespace frc2522cv;
 
 int main() {
-    VideoCapture cap("test_clip/medium_room.avi");
+    VideoCapture cap("../test_clips/medium_room.avi");
     //VideoCapture cap(0);
     if(!cap.isOpened())
         return -1;
@@ -25,7 +25,9 @@ int main() {
         }
 
         Mat gray = filter::redBinderBinary(frame);
-        Mat blobs = detect::redBinderBlob(original, gray);
+        Mat blobs = detect::showRedBinderBlob(original, gray);
+        Point2d largestBlob = detect::redBinderBlob(gray);
+        printf("(%f, %f)\n", largestBlob.x, largestBlob.y);
 
         imshow("filter", blobs);
         imshow("original", original);

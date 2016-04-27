@@ -1,5 +1,5 @@
 {
-  "name": "FRC 2522 Vision Server",
+  "name": "FRC_2522_Vision_Server",
   "version": "0.0.0",
   "description": "Server for 2522 vision tracking",
   "main": "server.js",
@@ -9,6 +9,8 @@
   },
   "gypfile": true,
   "dependencies": {
-    "bindings": "~1.2.1"
+    "bindings": "~1.2.1",
+    "express": "~4.13.4",
+    "body-parser": "~1.15.0"
   }
 }
