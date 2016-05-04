@@ -228,10 +228,10 @@
 1460760605 /home/connor/Documents/frc2522_vision/frc2522vision_src/camera.h
 	<opencv2/opencv.hpp>
 
-1461734874 source:/home/connor/Documents/frc2522_vision/frc2522vision_src/detect.cpp
+1461735182 source:/home/connor/Documents/frc2522_vision/frc2522vision_src/detect.cpp
 	"detect.h"
 
-1461731395 /home/connor/Documents/frc2522_vision/frc2522vision_src/detect.h
+1461811969 /home/connor/Documents/frc2522_vision/frc2522vision_src/detect.h
 	<vector>
 	<opencv2/opencv.hpp>
 	<opencv2/imgproc/imgproc.hpp>
@@ -247,7 +247,7 @@
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/highgui/highgui.hpp>
 
-1461733544 source:/home/connor/Documents/frc2522_vision/native_test/main.cpp
+1461735124 source:/home/connor/Documents/frc2522_vision/native_test/main.cpp
 	<iostream>
 	"../frc2522vision_src/camera.h"
 	"../frc2522vision_src/filter.h"

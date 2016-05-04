@@ -25,9 +25,26 @@ Handle<Value> Add(const Arguments& args) {
   return scope.Close(num);
 }
 
-void Init(Handle<Object> exports) {
-  exports->Set(String::NewSymbol("add"),
-      FunctionTemplate::New(Add)->GetFunction());
+Handle<Value> getBinderLocation(const Arguments& args) {
+  HandleScope scope;
+
+  Local<Object> obj = Object::New();
+  Local<Object> pointJS = Object::New();
+  //cv::Point2f point = frc2522cv::detect::redBinderBlob(frame);
+  cv::Point2f point(1.0, 5.0);
+  pointJS->Set(String::NewSymbol("x"), Number::New(point.x));
+  pointJS->Set(String::NewSymbol("y"), Number::New(point.y));
+
+  //Handle<String> hello = String::New("hello from c++ world!");
+  obj->Set(String::NewSymbol("point"), pointJS);
+
+  return scope.Close(obj);
+}
+
+
+void Init(Handle<Object> exports, Handle<Object> module) {
+  exports->Set(String::NewSymbol("add"), FunctionTemplate::New(Add)->GetFunction());
+  exports->Set(String::NewSymbol("getBinderLocation"), FunctionTemplate::New(getBinderLocation)->GetFunction());
 }
 
 NODE_MODULE(addon, Init)
