@@ -10,10 +10,10 @@ namespace frc2522cv {
     }
 
     Mat getWebFrame() {
-
+		return Mat();
     }
 
     Mat getYellowSquareFrame(int i) {
-
+		return Mat();
     }
 }

@@ -1,8 +1,10 @@
-examples/
-native_test/test_clip/*
+examples/*
 test_clips/*
 */node_modules/*
-node_server/build/*
+*/build/*
+
+#visual studio
+*.sdf
 
 # Compiled Object files
 *.slo
