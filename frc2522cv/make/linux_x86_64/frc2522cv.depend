@@ -285,11 +285,8 @@
 1450450936 /usr/local/include/opencv2/features2d/features2d.hpp
 	"opencv2/features2d.hpp"
 
-1462423839 source:/home/connor/Documents/frc2522_vision/_testing/frc2522cv/main.cpp
-	<iostream>
-	"../../frc2522cv/include/camera.h"
-	"../../frc2522cv/include/detect.h"
-	"../../frc2522cv/include/filter.h"
+1462418197 source:/home/connor/Documents/frc2522_vision/frc2522cv/src/camera.cpp
+	"../include/camera.h"
 
 1462417495 /home/connor/Documents/frc2522_vision/frc2522cv/include/camera.h
 	<opencv2/opencv.hpp>
@@ -365,6 +362,9 @@
 1450450936 /usr/local/include/opencv2/calib3d/calib3d_c.h
 	"opencv2/core/core_c.h"
 
+1462420050 source:/home/connor/Documents/frc2522_vision/frc2522cv/src/detect.cpp
+	"../include/detect.h"
+
 1462419416 /home/connor/Documents/frc2522_vision/frc2522cv/include/detect.h
 	<vector>
 	<opencv2/opencv.hpp>
@@ -372,9 +372,18 @@
 	<opencv2/highgui/highgui.hpp>
 	<opencv2/features2d/features2d.hpp>
 
+1462419155 source:/home/connor/Documents/frc2522_vision/frc2522cv/src/filter.cpp
+	"../include/filter.h"
+
 1462419110 /home/connor/Documents/frc2522_vision/frc2522cv/include/filter.h
 	<vector>
 	<opencv2/opencv.hpp>
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/highgui/highgui.hpp>
+
+1462423843 source:/home/connor/Documents/frc2522_vision/frc2522cv/make/linux_x86_64/main.cpp
+	<iostream>
+	"../../include/camera.h"
+	"../../include/detect.h"
+	"../../include/filter.h"
 

@@ -1,5 +1,5 @@
-examples/*
-test_clips/*
+_examples/*
+_test_clips/*
 */node_modules/*
 */build/*
 

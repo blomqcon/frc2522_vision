@@ -10,7 +10,7 @@
 
 namespace frc2522cv {
     using namespace cv;
-	
+
 	class Target {
         public:
             Target();
@@ -24,13 +24,13 @@ namespace frc2522cv {
             //Assumes foundTarget is the target.
             cv::Point3i location(Target foundTarget);
 	};
-	
+
     namespace detect {
 		enum Type {SimpleBlob, Blob, Contour, HoughLine};
-		
-		Point2f targetScreenLocation(Target target, Type type, Mat image);
-		Mat showScreenLocation(Target, Type type, Mat image);
-		
+
+		Point2f targetScreenLocation(Mat image, Target target, Type type);
+		Mat showScreenLocation(Mat image, Target target, Type type);
+
 		Point3f cameraLocation();
 		double robotAngle();
     }

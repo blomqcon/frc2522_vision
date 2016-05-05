@@ -1,14 +1,14 @@
 #include <iostream>
 
-#include "../../frc2522cv/include/camera.h"
-#include "../../frc2522cv/include/detect.h"
-#include "../../frc2522cv/include/filter.h"
+#include "../../include/camera.h"
+#include "../../include/detect.h"
+#include "../../include/filter.h"
 
 using namespace std;
 using namespace frc2522cv;
 
 int main() {
-    VideoCapture cap("../../_test_clips/medium_room.avi");
+    VideoCapture cap("../../../_test_clips/medium_room.avi");
     //VideoCapture cap(0);
     if(!cap.isOpened())
         return -1;

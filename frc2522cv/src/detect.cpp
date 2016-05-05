@@ -1,8 +1,13 @@
 
-#include "detect.h"
+#include "../include/detect.h"
 
 using namespace std;
 using namespace frc2522cv;
+
+Target::Target() {
+
+}
+
 
 double angle( cv::Point pt1, cv::Point pt2, cv::Point pt0 ) {
     double dx1 = pt1.x - pt0.x;
@@ -17,21 +22,22 @@ vector<cv::KeyPoint> simpleBlobDetect(Mat image) {
 	params.minDistBetweenBlobs = 100.0f;  // minimum 100 pixels between blobs
 	params.filterByColor = false;
 	params.filterByCircularity = false;
+	params.filterByConvexity = false;
+	params.filterByInertia = false;
 	params.filterByArea = true;
 	params.minArea = 10.0f;
 	params.maxArea = 99999999.9f;
 	params.minRepeatability = 1;
-	//SimpleBlobDetector blob_detector(params);
+
 	cv::Ptr<cv::SimpleBlobDetector> blob_detector = cv::SimpleBlobDetector::create(params);
 
 	vector<cv::KeyPoint> keypoints;
-	//blob_detector.detect(image, keypoints);
 	blob_detector->detect(image, keypoints);
 	return keypoints;
 }
 
-Point2f detect::targetScreenLocation(Target target, detect::Type type, Mat image) {
-	if (type == detect::Type::SimpleBlob) {
+Point2f detect::targetScreenLocation(Mat image, Target target, detect::Type type) {
+	if (type == detect::SimpleBlob) {
 		vector<KeyPoint> keypoints = simpleBlobDetect(image);
 		//cout << keypoints.size() << endl;
 
@@ -52,8 +58,8 @@ Point2f detect::targetScreenLocation(Target target, detect::Type type, Mat image
 	}
 }
 
-Mat detect::showScreenLocation(Target, detect::Type type, Mat image) {
-	if (type == detect::Type::SimpleBlob) {
+Mat detect::showScreenLocation(Mat image, Target, detect::Type type) {
+	if (type == detect::SimpleBlob) {
 		vector<KeyPoint> keypoints = simpleBlobDetect(image);
 
 		Mat image_blobs;
