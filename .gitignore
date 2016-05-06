@@ -5,6 +5,8 @@ _test_clips/*
 
 #visual studio
 *.sdf
+*.suo
+*.log
 
 # Compiled Object files
 *.slo
