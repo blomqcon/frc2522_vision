@@ -2,11 +2,14 @@
   "targets": [
     {
       "target_name": "addon",
-      "sources": ["../../src/addon.cpp"], 
-      "include_dirs": ["C:\Program Files\OpenCV\build\include", "../include/"],  
+      "sources": ["../../src/addon.cpp",
+				  "../../../frc2522cv/src/detect.cpp",
+				  "../../../frc2522cv/src/filter.cpp",
+				  "../../../frc2522cv/src/camera.cpp"
+				  ], 
+      "include_dirs": ["C:/Program Files/OpenCV/build/include"],  
       "link_settings": {
-                        'libraries':    ['-lopencv_core -lopencv_features2d -lopencv_contrib -lopencv_imgproc'],
-                        'library_dirs': ['C:\Program Files\OpenCV\build\x86\vc12\lib', "../../frc2522/make/windows_x86_64/Release"],
+                        'libraries':    ['C:/Program Files/OpenCV/build/x64/vc12/lib/opencv_ts300.lib', 'C:/Program Files/OpenCV/build/x64/vc12/lib/opencv_world300.lib']
                        }
     }
   ]

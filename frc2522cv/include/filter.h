@@ -4,14 +4,12 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-using namespace cv;
-
 namespace frc2522cv {
     namespace filter {
 		enum ColorSpace {RGB, HSV, YUV};
 
-        Mat binary(Mat image, filter::ColorSpace space, Scalar low, Scalar high);
-        Mat gray(Mat image, filter::ColorSpace space, Scalar low, Scalar high);
-        Mat color(Mat image);
+        cv::Mat binary(cv::Mat image, filter::ColorSpace space, cv::Scalar low, cv::Scalar high);
+        cv::Mat gray(cv::Mat image, filter::ColorSpace space, cv::Scalar low, cv::Scalar high);
+        cv::Mat color(cv::Mat image);
     }
 }

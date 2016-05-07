@@ -3,17 +3,17 @@
 using namespace cv;
 
 namespace frc2522cv {
-    Mat getDefaultFrame(VideoCapture cap) {
+    Mat camera::getDefaultFrame(VideoCapture cap) {
         Mat frame;
         cap >> frame;
         return frame;
     }
 
-    Mat getWebFrame() {
+    Mat camera::getWebFrame() {
 		return Mat();
     }
 
-    Mat getYellowSquareFrame(int i) {
+    Mat camera::getVideoFrame(std::string video, int i) {
 		return Mat();
     }
 }

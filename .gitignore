@@ -1,13 +1,25 @@
-_examples/*
-_test_clips/*
-*/node_modules/*
-*/build/*
+_examples/
+_test_clips/
+node_modules/
+
+#build directories
+node_frc2522build/make/windows_x86_64/build/*
+node_frc2522build/make/windows_x86_64/build/*
+Release/
+Debug/
+build/
 
 #visual studio
 *.sdf
 *.suo
 *.log
+*.VC.db
+*.vcxproj.user
 
+
+#######################################
+#######################################
+#######################################
 # Compiled Object files
 *.slo
 *.lo

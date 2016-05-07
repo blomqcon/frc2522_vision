@@ -1,11 +1,7 @@
-var frc2522cv = require('bindings')('addon.node');
+//var frc2522cv = require('bindings')('addon.node');
+var frc2522cv = require('../node_frc2522cv/make/windows_x86_64/build/Release/addon');
 
-module.exports.getTargetLocation = function(req, res) {
-	console.log("Request for target location");
-	res.status(200).send(frc2522cv.getBinderLocation())
-    res.status(200).send({'targetLoc': frc2522cv.add(3, 5)});
-}
-
-module.exports.test = function(req, res) {
-	res.status(200).send(frc2522cv.getBinderLocation().key);
+module.exports.targetScreenLocation = function(req, res) {
+	//console.log("Request for target location");
+	res.status(200).send(frc2522cv.targetScreenLocation({}));
 }

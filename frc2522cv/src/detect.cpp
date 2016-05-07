@@ -2,6 +2,7 @@
 #include "../include/detect.h"
 
 using namespace std;
+using namespace cv;
 using namespace frc2522cv;
 
 Target::Target() {
