@@ -1,8 +1,8 @@
 
 #include <node.h>
 
-#include "..\..\frc2522cv\include\detect.h"
-#include "..\..\frc2522cv\include\filter.h"
+#include "../../frc2522cv/include/detect.h"
+#include "../../frc2522cv/include/filter.h"
 
 using namespace v8;
 using node::AtExit;
@@ -10,8 +10,6 @@ using node::AtExit;
 bool validTargetScreenArguments(const FunctionCallbackInfo<Value>& args, Isolate* isolate);
 //cv::VideoCapture ipcam = cv::VideoCapture("http://192.168.0.90/mjpg/video.mjpg");
 cv::VideoCapture cam;
-Persistent<Object> a;
-
 
 cv::Mat getCamFrame(cv::VideoCapture cam) {
 	cv::Mat frame;

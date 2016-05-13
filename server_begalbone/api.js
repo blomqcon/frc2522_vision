@@ -1,6 +1,6 @@
 //var frc2522cv = require('bindings')('addon.node');
-var frc2522cv = require('../node_frc2522cv/make/windows_x86_64/build/Release/addon');
-//var frc2522cv = require('../node_frc2522cv/make/windows_x86_64/build/Release/addon.node');
+//var frc2522cv = require('../node_frc2522cv/make/windows_x86_64/build/Release/addon');
+var frc2522cv = require('../node_frc2522cv/make/linux_x86_64/build/Release/addon');
 var cleanup = require('./cleanup').Cleanup(cleanup);
 
 function cleanup() {

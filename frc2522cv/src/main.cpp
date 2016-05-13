@@ -1,7 +1,6 @@
 #include <iostream>
-#include <Windows.h>
 
-#include "../include/camera.h"
+//#include "../include/camera.h"
 #include "../include/detect.h"
 #include "../include/filter.h"
 
@@ -12,8 +11,9 @@ using namespace frc2522cv;
 int main() {
 	Mat frame;
     Mat original;
+    VideoCapture webcam = VideoCapture(0);
     while(true) {
-		frame = camera::getDefaultFrame();
+		webcam >> frame;
 		frame.copyTo(original);
 
         Target target = Target();
