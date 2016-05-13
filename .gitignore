@@ -15,6 +15,7 @@ build/
 *.log
 *.VC.db
 *.vcxproj.user
+*.VC.VC.opendb
 
 
 #######################################

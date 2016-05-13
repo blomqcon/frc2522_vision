@@ -1,19 +1,29 @@
-#include "../include/camera.h"
+ #include "../include/camera.h"
 
-using namespace cv;
+ using namespace cv;
 
 namespace frc2522cv {
-    Mat camera::getDefaultFrame(VideoCapture cap) {
+    Mat camera::getDefaultFrame() {
+		//if (!cap.isOpened()) //error
         Mat frame;
-        cap >> frame;
+        webcam >> frame;
         return frame;
     }
 
     Mat camera::getWebFrame() {
-		return Mat();
+		Mat frame;
+		ipcam >> frame;
+		return frame;
     }
 
-    Mat camera::getVideoFrame(std::string video, int i) {
-		return Mat();
-    }
+     Mat camera::getVideoFrame(std::string video, int i) {
+ 		Mat frame;
+ 		testVid >> frame;
+ 		if (frame.empty()) {
+ 			testVid.release();
+ 			testVid.open("../../_test_clips/medium_room.avi");
+ 			testVid >> frame;
+ 		}
+ 		return frame;
+     }
 }

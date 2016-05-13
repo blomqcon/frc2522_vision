@@ -18,8 +18,10 @@ var api = require('./api');
 app.get('/api/getTargetLocation', api.targetScreenLocation);
 
 var camera = require('./camera');
-//app.get('/api/camera/setBlinkRate', camera.setBlinkRate);
-//app.get('/api/camera/setPosition', camera.setPosition);
+app.get('/api/bbb/setBlinkRate', camera.setBlinkRate);
+app.get('/api/bbb/cam/enableAutoTrack', camera.enableAutoTrack);
+app.get('/api/bbb/cam/getAngles', camera.getAngles);
+app.get('/api/bbb/cam/setAngles', camera.setAngles);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

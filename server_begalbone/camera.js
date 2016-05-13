@@ -6,14 +6,6 @@ var http = require('http');
 //var bone = require('octalbonescript');
 var bone = {pinMode: function() {}, digitalWrite: function() {}, analogWrite: function() {}, ANALOG_OUTPUT: 0};
 
-
-var xServoPin = 'P9_14';
-var yServoPin = 'P9_15';
-
-bone.pinMode('USR3', 'out'); //On-board led
-bone.pinMode(xServoPin, bone.ANALOG_OUTPUT);
-bone.digitalWrite('USR3', 1);
-
 class Servo {
 	constructor(bone, servoPin, angle) {
 		this.cycle_length = 20.0; //ms
@@ -46,29 +38,42 @@ class Servo {
 	}
 }
 
+class BlinkLed {
+    constructor(pin, rate) {
+        this.pin = pin;
+        this.state = 0;
+        this.setBlinkRate(rate);
+    }
 
-var getTargetOptions = {
-  host: 'localhost',
-  path: '/api/getTargetLocation',
-  port: '3001'
+    setBlinkRate(rate) {
+		this.rate = rate;
+		clearInterval(this.timer);
+		this.timer = setInterval(() => this.toggleLED(), this.rate);
+	}
+
+    toggleLED() {
+    	console.log(this.pin, this.state);
+    	this.state = this.state ? 0 : 1;
+		bone.digitalWrite(this.pin, this.state);
+    }
 };
 
-let xServo = new Servo(bone, xServoPin, 0.0);
-let yServo = new Servo(bone, yServoPin, 0.0);
 
-setInterval(function() {
-	console.log("X angle: " + xServo.getAngle());
-	console.log("Y angle: " + yServo.getAngle());
-	console.log();
-	
+
+
+function autotrackFunc() {
+	var getTargetOptions = {
+	  host: 'localhost',
+	  path: '/api/getTargetLocation',
+	  port: '3001'
+	};
+
 	http.request(getTargetOptions, function(response) {
 		var data = '';
-
 		response.on('data', function (chunk) { data += chunk;});
 
 		response.on('end', function () {
 			var json = JSON.parse(data);
-			console.log(json);
 			
 			if((json.centerPoint.x - json.targetPoint.x) > 10.0) {
 				xServo.setAngle(xServo.getAngle() - 1.0);
@@ -83,76 +88,51 @@ setInterval(function() {
 			}
 		});
 	}).end();
-}, 100);
-
-
-
-/*var led = (function (bone) {
-	var state = 0;
-	var rate = 100;
-	var timer = setInterval(toggleLED, rate);
-	
-	function toggleLED() {
-		state = state ? 0 : 1;
-		bone.digitalWrite('USR3', state);
-	}
-	
-	function stopTimer() {
-		clearInterval(timer);
-		timer = null;
-	}
-	
-	function setBlinkRate(r) {
-		rate = r;
-		stopTimer();
-		timer = setInterval(toggleLED, rate);
-	}
-
-	return {
-		setBlinkRate: setBlinkRate
-	};
-}(bone));*/
-
-
-/*var camera = (function (bone) {
-	var duty_min = 0.03;
-	var position = 0;
-	var increment = 0.01;
-	//var timer = setInterval(scan, 100);
-	
-	function scan() {
-		setPosition(position + increment);
-		var duty_cycle = (position * 0.115) + duty_min;
-		//bone.analogWrite('P9_14', duty_cycle, 50, scheduleNextUpdate);
-		console.log("Duty Cycle: " + parseFloat(duty_cycle * 100).toFixed(1) + " %");   
-	}
-	
-	function setPosition(pos) {
-		if(pos <= 0) {
-			position = 0;
-			increment = -increment;
-		} else if(pos >= 1) {
-			position = 1;
-			increment = -increment;
-		} else {
-			position = pos;
-		}
-	}
-	
-	return {
-		setPosition: setPosition
-	};
-}(bone));*/
-
-/*module.exports.setBlinkRate = function(req, res) {
-	led.setBlinkRate(req.query.rate);
-	res.status(200).send("Rate set to " + req.query.rate + "ms!");
 }
 
-module.exports.setPosition = function(req, res) {
-	camera.setPosition(req.query.pos)
-	res.status(200).send("Position set to " + req.query.pos + "!");
-}*/
+
+var xServoPin = 'P9_14';
+var yServoPin = 'P9_16';
+var ledPin = 'USR3';
+
+bone.pinMode(ledPin, 'out'); //On-board led
+bone.pinMode(xServoPin, bone.ANALOG_OUTPUT);
+bone.pinMode(yServoPin, bone.ANALOG_OUTPUT);
+
+let xServo = new Servo(bone, xServoPin, 0.0);
+let yServo = new Servo(bone, yServoPin, 0.0);
+let led = new BlinkLed(ledPin, 1000);
+var autoTrack = null;
 
 
+/***********************************************/
+/******************  API   *********************/
+/***********************************************/
+module.exports.setBlinkRate = function(req, res) {
+	led.setBlinkRate(req.query.rate);
+	res.status(200).send();
+}
 
+module.exports.enableAutoTrack = function(req, res) {
+	if(req.query.auto && !(autoTrack)) {
+		console.log("enabling auto track...");
+		autoTrack = setInterval(autotrackFunc, 100);
+	} else if((req.query.auto) && autoTrack) {
+		console.log("disabling auto track...");
+		clearInterval(autoTrack);
+		autoTrack = null;
+	}
+	res.status(200).send();
+}
+
+module.exports.getAngles = function(req, res) {
+	res.status(200).send({x: xServo.getAngle(), y: yServo.getAngle()});
+}
+
+module.exports.setAngles = function(req, res) {
+	if(!(autoTrack)) {
+		xServo.setAngle(req.query.x);
+		yServo.setAngle(req.query.y);
+	}
+	res.status(200).send({x: xServo.getAngle(), y: yServo.getAngle()});
+}
