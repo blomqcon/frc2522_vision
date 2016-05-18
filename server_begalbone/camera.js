@@ -3,11 +3,11 @@
 var http = require('http');
 //var bone = require('bonescript');
 //var bone = require('/bonescript-0.5.0-beta5/main.js');
-//var bone = require('octalbonescript');
-var bone = {pinMode: function() {}, digitalWrite: function() {}, analogWrite: function() {}, ANALOG_OUTPUT: 0};
+var bone = require('octalbonescript');
+//var bone = {pinMode: function() {}, digitalWrite: function() {}, analogWrite: function() {}, ANALOG_OUTPUT: 0};
 
 class Servo {
-	constructor(bone, servoPin, angle) {
+	constructor(pin, angle) {
 		this.cycle_length = 20.0; //ms
 		this.cycle_min = 0.9; //ms
 		this.cycle_max = 2.1; //ms
@@ -16,9 +16,8 @@ class Servo {
 		this.duty_min = this.cycle_min / this.cycle_length; //4.5%
 		this.duty_max = this.cycle_max / this.cycle_length; //10.5%
 		
-		this.bone = bone;
-		this.servoPin = servoPin;
-		this.angle = angle;
+		this.servoPin = pin;
+		this.setAngle(angle);
 	}
 		
 	setAngle(a) {
@@ -30,7 +29,9 @@ class Servo {
 			this.angle = a;
 		
 		var duty_cycle = this.duty_min + ((this.duty_max - this.duty_min) * ((this.angle + 90.0) / 180.0));
-		this.bone.analogWrite(this.servoPin, duty_cycle, this.frequency);
+		console.log(this.servoPin, duty_cycle, this.frequency);
+		console.log(bone.analogWrite);
+		bone.analogWrite(this.servoPin, duty_cycle, this.frequency);
 	}
 	
 	getAngle() {
@@ -91,7 +92,8 @@ function autotrackFunc() {
 }
 
 
-var xServoPin = 'P9_14';
+//var xServoPin = 'P9_14';
+var xServoPin = 'P9_22';
 var yServoPin = 'P9_16';
 var ledPin = 'USR3';
 
@@ -99,8 +101,8 @@ bone.pinMode(ledPin, 'out'); //On-board led
 bone.pinMode(xServoPin, bone.ANALOG_OUTPUT);
 bone.pinMode(yServoPin, bone.ANALOG_OUTPUT);
 
-let xServo = new Servo(bone, xServoPin, 0.0);
-let yServo = new Servo(bone, yServoPin, 0.0);
+let xServo = new Servo(xServoPin, 0.0);
+let yServo = new Servo(yServoPin, 0.0);
 let led = new BlinkLed(ledPin, 1000);
 var autoTrack = null;
 

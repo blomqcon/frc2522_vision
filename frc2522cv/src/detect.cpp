@@ -30,10 +30,10 @@ vector<cv::KeyPoint> simpleBlobDetect(Mat image) {
 	params.maxArea = 99999999.9f;
 	params.minRepeatability = 1;
 
-	cv::Ptr<cv::SimpleBlobDetector> blob_detector = cv::SimpleBlobDetector::create(params);
+	//cv::Ptr<cv::SimpleBlobDetector> blob_detector = cv::SimpleBlobDetector::create(params);
 
 	vector<cv::KeyPoint> keypoints;
-	blob_detector->detect(image, keypoints);
+	//blob_detector->detect(image, keypoints);
 	return keypoints;
 }
 
