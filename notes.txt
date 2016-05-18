@@ -1,0 +1,7 @@
+http://192.168.0.90/view/viewer_index.shtml?id=0
+
+http://derekmolloy.ie/beaglebone/getting-started-usb-network-adapter-on-the-beaglebone/
+
+
+http://visualgdb.com/tutorials/beaglebone/crosscompiler/
+https://leakforums.net/thread-213244

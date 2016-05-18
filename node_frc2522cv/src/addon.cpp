@@ -33,11 +33,11 @@ void targetScreenLocation(const FunctionCallbackInfo<Value>& args) {
 	}
 	frc2522cv::Target target = frc2522cv::Target();
 	if(!cam.isOpened())
-		cam = cv::VideoCapture(0);
+		cam = cv::VideoCapture("http://192.168.0.90/mjpg/video.mjpg");
 	cv::Mat image = getCamFrame(cam);
 	cv::Mat filteredImage = frc2522cv::filter::binary(image, frc2522cv::filter::HSV, cv::Scalar(0.0, 50.0, 50.0), cv::Scalar(60.0, 255.0, 255.0));
-	cv::Point2f targetPoint = frc2522cv::detect::targetScreenLocation(filteredImage, target, frc2522cv::detect::SimpleBlob);
-	//cv::Point2f targetPoint(100.0, 500.0);
+	//cv::Point2f targetPoint = frc2522cv::detect::targetScreenLocation(filteredImage, target, frc2522cv::detect::SimpleBlob);
+	cv::Point2f targetPoint(100.0, 500.0);
 	cv::Point2f centerPoint(360.0, 240.0);
 
 	Local<Object> obj = Object::New(isolate);
